@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "description": "Encode / decode data to the string access token",
   "main": "lib/oauth-token.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichalB/oauth-token.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MichalB/oauth-token/issues"
+  },
+  "homepage": "https://github.com/MichalB/oauth-token#readme",
   "scripts": {
     "prepublish": "npm run eslint && npm run test",
     "eslint": "eslint lib/*.js",
     "test": "mocha"
   },
   "author": "Michal Blaha <misablaha@gmail.com>",
-  "license": "MIT",
   "dependencies": {
     "bs58": "^3.0.0",
     "protobufjs": "^5.0.1"
@@ -35,12 +42,8 @@
   "directories": {
     "test": "test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MichalB/oauth-token.git"
+  "engines": {
+    "node": ">=4"
   },
-  "bugs": {
-    "url": "https://github.com/MichalB/oauth-token/issues"
-  },
-  "homepage": "https://github.com/MichalB/oauth-token#readme"
+  "license": "MIT"
 }

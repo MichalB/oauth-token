@@ -1,0 +1,46 @@
+{
+  "name": "oauth-token",
+  "version": "1.0.0",
+  "description": "Encode / decode data to the string access token",
+  "main": "lib/oauth-token.js",
+  "scripts": {
+    "prepublish": "npm run eslint && npm run test",
+    "eslint": "eslint lib/*.js",
+    "test": "mocha"
+  },
+  "author": "Michal Blaha <misablaha@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bs58": "^3.0.0",
+    "protobufjs": "^5.0.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.8.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.3.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "mocha": "^3.1.2"
+  },
+  "keywords": [
+    "token",
+    "oauth",
+    "oauth2",
+    "oauth token",
+    "access token",
+    "access-token",
+    "refresh token",
+    "refresh-token"
+  ],
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichalB/oauth-token.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MichalB/oauth-token/issues"
+  },
+  "homepage": "https://github.com/MichalB/oauth-token#readme"
+}

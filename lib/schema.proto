@@ -1,0 +1,16 @@
+
+message AccessToken {
+  enum TokenType {
+    ACCESS_TOKEN = 0;
+    REFRESH_TOKEN = 1;
+  }
+
+  required TokenType type = 1;
+  optional string app_id = 2;
+  optional string app_secret = 7;
+  required string user_id = 3;
+  optional string user_secret = 4;
+  optional string session = 8;
+  optional uint32 issued = 5;
+  optional uint32 expires_in = 6;
+}

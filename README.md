@@ -10,24 +10,46 @@ $ npm install oauth-token
 
 ## Usage
 
+##### Configure
+
 ```javascript
 var options = {
   salt: 'some_random_string',
-  expires_in: 86400 // 24 hours
+  // How long tokens will be valid since creation
+  ttl: 86400,
+  // Function for verifying validity of the application secret key
+  checkAppSecret: function (userId, userSecret, cb) {
+    // Return promise OR use callback
+    return Promise.resolve(true)
+  },
+  // Function for verifying validity of the user secret key
+  checkUserSecret: function (userId, userSecret, cb) {
+    return Promise.resolve(true)
+  },
+  // Function for verifying the session existence
+  checkSession: function (sessionId, cb) {
+    return Promise.resolve(true)
+  }
 }
 
-var OauthToken = require('./')(options)
+var OauthToken = require('oauth-token')(options)
+```
 
-var oauthToken = OauthToken.create({
-  app_id: 'my_app',
-  app_secret: '9iZp4FqiubL6',
-  user_id: '198623486', // user_id is required and must be string
-  user_secret: '1HMuXS5KBTWQ',
+##### Create token
+
+```javascript
+var data = {
+  appId: 'my_app',
+  appSecret: '9iZp4FqiubL6',
+  userId: '198623486', // userId is required and must be string
+  userSecret: '1HMuXS5KBTWQ',
   session: 'QxBfjfUQsD66'
-})
+}
 
 /**
- * Returns
+ * Create OAuth token
+ * uses underscore because of the OAuth2 convention
+ *
  * {
  *   access_token: 'HUdefAxx2Sxknx2QffZso2mgsSAmFLZpPrqPNVduZKNkCRaCqgLjh3rDzu8xJkkGsyx3XX6UWyZ2Yy9a4sQaBwss5R4f5bLsUat7ky8f5m1EJeE3N266ofqaA',
  *   refresh_token: '8VzrgFaYVH9LjodbgwKfFxy1EFiVraty2HCcHtsqNxGMkHrm5BNvfpPzJM2EmRCb4QS5R5pcdp83pxRM6juou4nDwc8EkJzrMhtLJALsMZnjeFt6U',
@@ -37,25 +59,55 @@ var oauthToken = OauthToken.create({
  * }
  */
 
-var data = OauthToken.decode(oauthToken.access_token)
+// returns Promise
+OauthToken.create(data).then(function (oauthToken) {
+})
+
+// OR use callback
+OauthToken.create(data, function (err, oauthToken) {
+})
+```
+
+##### Decode token
+
+```javascript
+var accessToken = 'HUdefAxx2Sxknx2QffZso2mgsSAmFLZpPrqPNVduZKNkCRaCqgLjh3rDzu8xJkkGsyx3XX6UWyZ2Yy9a4sQaBwss5R4f5bLsUat7ky8f5m1EJeE3N266ofqaA'
 
 /**
- * Returns
+ * Decode access_token to data
+ *
  * {
- *   app_id: 'my_app',
- *   app_secret: '9iZp4FqiubL6',
- *   user_id: '198623486',
- *   user_secret: '1HMuXS5KBTWQ',
+ *   appId: 'my_app',
+ *   appSecret: '9iZp4FqiubL6',
+ *   userId: '198623486',
+ *   userSecret: '1HMuXS5KBTWQ',
  *   session: 'QxBfjfUQsD66',
  *   issued: 1477775581,
- *   expires_in: 86400
+ *   ttl: 86400
  * }
+ *
+ * checkAppSecret, checkUserSecret and checkSession
+ * will be used for token validity verifying
  */
 
-var newToken = OauthToken.refresh(oauthToken.refresh_token)
+// returns Promise
+OauthToken.decode(accessToken).then(function (data) {
+})
+
+// OR use callback
+OauthToken.decode(accessToken, function (err, data) {
+})
+```
+
+##### Refresh token
+
+```javascript
+var refreshToken = '8VzrgFaYVH9LjodbgwKfFxy1EFiVraty2HCcHtsqNxGMkHrm5BNvfpPzJM2EmRCb4QS5R5pcdp83pxRM6juou4nDwc8EkJzrMhtLJALsMZnjeFt6U'
 
 /**
- * Returns
+ * Create new OAuth token by refresh_token
+ * all original values will be preserved only 'issued' will set on now
+ *
  * {
  *   access_token: 'HUdefAxx2Sxknx2QffZso2mgsSAmFLZpPrqPNVduZKNkCRaCqgLjh3rDzu8xJkkGsyx3XX6UWyZ2Yy9a4sQaBwswWVrC3NnMAdK7BZYmtFCHYaTbWTTSUWpvk',
  *   refresh_token: '8VzrgFaYVH9LjodbgwKfFxy1EFiVraty2HCcHtsqNxGMkHrm5BNvfpPzJM2EmRCb4QS5R5pcdp83pxRM6juou4nDwc8EkJzrMhtLJALsMZnjeFt6U',
@@ -64,6 +116,14 @@ var newToken = OauthToken.refresh(oauthToken.refresh_token)
  *   expires_in: 86400
  * }
  */
+
+// returns Promise
+OauthToken.refresh(refreshToken).then(function (oauthToken) {
+})
+
+// OR use callback
+OauthToken.refresh(refreshToken, function (err, oauthToken) {
+})
 ```
 
 ## License

@@ -6,11 +6,11 @@ message AccessToken {
   }
 
   required TokenType type = 1;
-  optional string app_id = 2;
-  optional string app_secret = 7;
-  required string user_id = 3;
-  optional string user_secret = 4;
+  optional string appId = 2;
+  optional string appSecret = 7;
+  required string userId = 3;
+  optional string userSecret = 4;
   optional string session = 8;
   optional uint32 issued = 5;
-  optional uint32 expires_in = 6;
+  optional uint32 ttl = 6;
 }

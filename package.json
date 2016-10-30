@@ -18,6 +18,7 @@
   },
   "author": "Michal Blaha <misablaha@gmail.com>",
   "dependencies": {
+    "bluebird": "^3.4.6",
     "bs58": "^3.0.0",
     "protobufjs": "^5.0.1"
   },

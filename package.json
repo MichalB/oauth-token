@@ -1,6 +1,6 @@
 {
   "name": "oauth-token",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Encode / decode data to the string access token",
   "main": "lib/oauth-token.js",
   "repository": {

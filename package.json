@@ -14,7 +14,8 @@
   "scripts": {
     "prepublish": "npm run eslint && npm run test",
     "eslint": "eslint lib/*.js",
-    "test": "mocha"
+    "test": "mocha --bail --check-leaks test/",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha --  --reporter dot --bail --check-leaks test/"
   },
   "author": "Michal Blaha <misablaha@gmail.com>",
   "dependencies": {
@@ -28,6 +29,7 @@
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": "^3.3.0",
     "eslint-plugin-standard": "^2.0.1",
+    "istanbul": "^0.4.5",
     "mocha": "^3.1.2"
   },
   "keywords": [

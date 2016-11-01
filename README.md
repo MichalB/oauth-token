@@ -1,6 +1,7 @@
 # oauth-token
 
 [![Build](https://travis-ci.org/MichalB/oauth-token.svg?branch=master)](https://travis-ci.org/MichalB/oauth-token)
+[![Coverage Status](https://coveralls.io/repos/github/MichalB/oauth-token/badge.svg?branch=master)](https://coveralls.io/github/MichalB/oauth-token?branch=master)
 
 ## Instalation
 
